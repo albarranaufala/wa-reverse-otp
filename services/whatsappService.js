@@ -110,7 +110,6 @@ class WhatsAppService {
       const successMessage =
         `✅ OTP verified successfully!\n\n` +
         `🔗 Login URL: ${loginUrl}\n\n` +
-        `🎫 Bearer Token: ${bearerToken}\n\n` +
         `⏰ Token expires in 24 hours`;
 
       await this.sendMessage(from, successMessage);
