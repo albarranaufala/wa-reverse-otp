@@ -6,7 +6,7 @@ class WhatsAppService {
     this.accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
     this.phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
     this.verifyToken = process.env.WHATSAPP_VERIFY_TOKEN;
-    this.apiUrl = `https://graph.facebook.com/v18.0/${this.phoneNumberId}/messages`;
+    this.apiUrl = `https://graph.facebook.com/v22.0/${this.phoneNumberId}/messages`;
     this.isReady = true; // API is always ready once configured
 
     if (!this.accessToken || !this.phoneNumberId) {
@@ -141,6 +141,7 @@ class WhatsAppService {
       const payload = {
         messaging_product: "whatsapp",
         to: to,
+        type: "text",
         text: {
           body: message,
         },
@@ -170,7 +171,7 @@ class WhatsAppService {
   async sendTemplateMessage(
     to,
     templateName,
-    languageCode = "en",
+    languageCode = "en_US",
     components = []
   ) {
     try {
@@ -207,6 +208,13 @@ class WhatsAppService {
       );
       throw error;
     }
+  }
+
+  /**
+   * Send hello_world template message (Meta's default template)
+   */
+  async sendHelloWorld(to) {
+    return await this.sendTemplateMessage(to, "hello_world", "en_US");
   }
 
   getPendingOTPs() {

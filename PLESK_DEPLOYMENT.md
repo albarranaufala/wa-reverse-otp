@@ -88,6 +88,15 @@ In Plesk Node.js section, add environment variables:
      -d '{"phoneNumber": "+1234567890", "userId": "testuser"}'
    ```
 
+3. **Test Template Message** (optional):
+   ```bash
+   curl -i -X POST \
+     https://graph.facebook.com/v22.0/YOUR_PHONE_NUMBER_ID/messages \
+     -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+     -H 'Content-Type: application/json' \
+     -d '{ "messaging_product": "whatsapp", "to": "RECIPIENT_PHONE", "type": "template", "template": { "name": "hello_world", "language": { "code": "en_US" } } }'
+   ```
+
 ## Troubleshooting
 
 ### Common Issues

@@ -101,6 +101,42 @@ router.get("/otp-status/:otpId", (req, res) => {
   }
 });
 
+/**
+ * POST /api/v1/test-whatsapp
+ * Test WhatsApp template message (for testing purposes)
+ */
+router.post("/test-whatsapp", async (req, res) => {
+  try {
+    const { phoneNumber } = req.body;
+
+    // Validate input
+    if (!phoneNumber) {
+      return res.status(400).json({
+        error: "Missing required field",
+        message: "phoneNumber is required",
+      });
+    }
+
+    const whatsappService = new WhatsAppService();
+
+    // Send hello_world template
+    const result = await whatsappService.sendHelloWorld(phoneNumber);
+
+    res.json({
+      success: true,
+      message: "Test template message sent successfully",
+      whatsappResponse: result,
+    });
+  } catch (error) {
+    console.error("Error sending test message:", error);
+    res.status(500).json({
+      error: "Internal server error",
+      message: "Failed to send test message",
+      details: error.response?.data || error.message,
+    });
+  }
+});
+
 // Export the pendingOTPs for use in WhatsApp service
 router.pendingOTPs = pendingOTPs;
 

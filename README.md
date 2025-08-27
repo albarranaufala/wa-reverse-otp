@@ -1,6 +1,28 @@
 # WhatsApp Reverse OTP API
 
-API for reverse OTP functionality using the official WhatsApp Business API. Instead of users receiving OTP codes via WhatsApp, users send OTP codes to WhatsApp for verification. Once verified, the backend responds with a login URL and Bearer token.
+API for reverse OTP functionality using the official WhatsApp Business API. Instead of users receiving OTP codes via WhatsApp, users send OTP codes to WhatsApp for verification. Once ve### Testing the API
+
+1. **Request OTP:**
+   ```bash
+   curl -X POST http://localhost:3000/api/v1/reverse-otp \
+     -H "Content-Type: application/json" \
+     -d '{"phoneNumber": "+1234567890", "userId": "testuser"}'
+   ```
+
+2. **Test WhatsApp Template (hello_world):**
+   ```bash
+   curl -X POST http://localhost:3000/api/v1/test-whatsapp \
+     -H "Content-Type: application/json" \
+     -d '{"phoneNumber": "+1234567890"}'
+   ```
+
+3. **Send OTP via WhatsApp:**
+   Send the received OTP code to your WhatsApp Business number
+
+4. **Check Status:**
+   ```bash
+   curl http://localhost:3000/api/v1/otp-status/YOUR_OTP_ID
+   ```end responds with a login URL and Bearer token.
 
 ## Features
 
@@ -14,7 +36,7 @@ API for reverse OTP functionality using the official WhatsApp Business API. Inst
 ## Tech Stack
 
 - **Backend**: Express.js
-- **WhatsApp Integration**: Official WhatsApp Business API
+- **WhatsApp Integration**: Official WhatsApp Business API v22.0
 - **HTTP Client**: Axios
 - **Security**: Helmet, CORS
 - **Environment**: dotenv
@@ -40,6 +62,25 @@ Request a reverse OTP for user verification.
   "otpId": "abc123...",
   "expiresIn": "5 minutes",
   "instructions": "Send the OTP code to our WhatsApp number to complete verification"
+}
+```
+
+### POST `/api/v1/test-whatsapp`
+Test WhatsApp template message functionality.
+
+**Request Body:**
+```json
+{
+  "phoneNumber": "+1234567890"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Test template message sent successfully",
+  "whatsappResponse": {...}
 }
 ```
 
@@ -240,6 +281,19 @@ npm install -g ngrok
 ngrok http 3000
 
 # Use the provided HTTPS URL for webhook configuration
+```
+
+### Direct WhatsApp API Testing
+
+You can also test the WhatsApp API directly using Meta's format:
+
+```bash
+# Test with hello_world template (Meta's default)
+curl -i -X POST \
+  https://graph.facebook.com/v22.0/YOUR_PHONE_NUMBER_ID/messages \
+  -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{ "messaging_product": "whatsapp", "to": "RECIPIENT_PHONE", "type": "template", "template": { "name": "hello_world", "language": { "code": "en_US" } } }'
 ```
 
 ## Deployment
