@@ -163,16 +163,22 @@ npm start
 
 ```
 wa-reverse-otp/
-├── src/
-│   ├── routes/
-│   │   ├── reverseOtp.js          # API routes for OTP management
-│   │   └── webhook.js             # Webhook handling for WhatsApp
-│   ├── services/
-│   │   ├── otpService.js          # OTP generation and validation
-│   │   └── whatsappService.js     # WhatsApp Business API integration
-│   └── index.js                   # Main application entry point
+├── routes/
+│   ├── reverseOtp.js          # API routes for OTP management
+│   └── webhook.js             # Webhook handling for WhatsApp
+├── services/
+│   ├── otpService.js          # OTP generation and validation
+│   └── whatsappService.js     # WhatsApp Business API integration
+├── utils/                     # Utility functions
+├── index.js                   # Main application logic
+├── app.js                     # Plesk-compatible entry point
+├── web.config                 # IIS/Windows configuration
+├── .htaccess                  # Apache configuration
+├── ecosystem.config.json      # PM2 process management
+├── PLESK_DEPLOYMENT.md        # Plesk deployment guide
 ├── package.json
-├── .env
+├── .env                       # Environment variables
+├── .env.production            # Production environment template
 └── README.md
 ```
 
@@ -261,10 +267,22 @@ ngrok http 3000
 
 ### Recommended Hosting Platforms
 
+- **Plesk**: See `PLESK_DEPLOYMENT.md` for detailed setup guide
 - **Heroku**: Easy deployment with add-ons
 - **AWS**: EC2 or Elastic Beanstalk
 - **Google Cloud**: App Engine or Compute Engine
 - **Digital Ocean**: Droplets with PM2
+
+### Plesk Deployment
+
+For Plesk hosting, this application is pre-configured with:
+- `app.js` entry point for Plesk compatibility
+- `web.config` for IIS/Windows hosting
+- `.htaccess` for Apache hosting
+- Production environment template
+- PM2 process management scripts
+
+See `PLESK_DEPLOYMENT.md` for complete setup instructions.
 
 ## Troubleshooting
 

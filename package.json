@@ -2,20 +2,24 @@
   "name": "wa-reverse-otp",
   "version": "1.0.0",
   "description": "API for WhatsApp reverse OTP functionality",
-  "main": "src/index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "NODE_ENV=production node app.js",
+    "pm2:start": "pm2 start app.js --name wa-reverse-otp",
+    "pm2:stop": "pm2 stop wa-reverse-otp",
+    "pm2:restart": "pm2 restart wa-reverse-otp",
+    "pm2:delete": "pm2 delete wa-reverse-otp"
   },
-  "keywords": [
-    "whatsapp",
-    "otp",
-    "api",
-    "express"
-  ],
+  "keywords": ["whatsapp", "otp", "api", "express", "plesk", "production"],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
   "dependencies": {
     "axios": "^1.11.0",
     "cors": "^2.8.5",

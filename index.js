@@ -52,13 +52,16 @@ app.use("*", (req, res) => {
 // Initialize WhatsApp service
 const whatsappService = new WhatsAppService();
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Health check: http://localhost:${PORT}/health`);
-  console.log(`Webhook URL: http://localhost:${PORT}/webhook`);
+// Only start the server if this file is run directly (not required as a module)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    console.log(`Health check: http://localhost:${PORT}/health`);
+    console.log(`Webhook URL: http://localhost:${PORT}/webhook`);
 
-  // Initialize WhatsApp service
-  whatsappService.initialize();
-});
+    // Initialize WhatsApp service
+    whatsappService.initialize();
+  });
+}
 
 module.exports = app;

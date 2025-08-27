@@ -35,4 +35,5 @@ WhatsApp Reverse OTP API has been successfully created with:
 - ✅ Added webhook support for receiving messages
 - ✅ Improved security and reliability
 - ✅ No more QR code dependency - uses official Meta API
+- ✅ Moved all source files to root directory for simplified structure
 - ✅ Ready for production deployment

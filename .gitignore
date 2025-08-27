@@ -1,5 +1,6 @@
 node_modules/
 .env
+.env.production
 .DS_Store
 *.log
 npm-debug.log*
@@ -9,3 +10,5 @@ yarn-error.log*
 .wa-session-*
 .wwebjs_auth/
 .wwebjs_cache/
+logs/
+pm2.json
